@@ -23,6 +23,9 @@ def home():
 
     return render_template("home.html", user=current_user)
 
+@views.route('/about')
+def about():
+    return render_template("about.html", user=current_user)
 
 @views.route('/delete-note', methods=['POST'])
 def delete_note():
