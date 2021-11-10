@@ -1,2 +1,4 @@
 #don't want to store them
 __pycache__
+
+database.db
