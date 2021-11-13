@@ -51,7 +51,7 @@ def insert():
             flash('Email already exists.', category='error')
         else:
             #insert account.
-            insert_user = User(email=email, first_name=first_name, last_name=last_name, password=password, birth_date=birthdate, phone=phone, course=course)
+            insert_user = User(email=email, first_name=first_name, last_name=last_name, password=generate_password_hash(password, method='sha256'), birth_date=birthdate, phone=phone, course=course)
             db.session.add(insert_user)
             db.session.commit()
             flash('Account created!', category='success')
