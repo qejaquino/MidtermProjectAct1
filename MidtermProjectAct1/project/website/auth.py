@@ -41,22 +41,23 @@ def insert():
         first_name = request.form.get('firstName')
         last_name = request.form.get('lastName')
         email = request.form.get('email')
-        password = request.form.get('password1')
+        password = request.form.get('password')
         birthdate = request.form.get('birthDate')
         phone = request.form.get('Phone')
+        course = request.form.get('course')
 
         user = User.query.filter_by(email=email).first()
         if user:
             flash('Email already exists.', category='error')
         else:
             #insert account.
-            insert_user = User(email=email, first_name=first_name, last_name=last_name, password=password, birth_date=birthdate, phone=phone)
+            insert_user = User(email=email, first_name=first_name, last_name=last_name, password=password, birth_date=birthdate, phone=phone, course=course)
             db.session.add(insert_user)
             db.session.commit()
             flash('Account created!', category='success')
-            return redirect(url_for('views.home'))
+            return redirect(url_for('views.account'))
     
-    return render_template("home.html", user=current_user)
+    return render_template("account.html", user=current_user)
 
     
 @auth.route('/sign-up', methods=['GET', 'POST'])
