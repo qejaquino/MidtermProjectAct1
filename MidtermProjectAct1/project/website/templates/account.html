@@ -9,6 +9,7 @@
         <div class="jumbotron p-3">
           <h2>Manage <b>Accounts: </b><button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#accounts">Add New Account</button></h2>
           <table class="table table-hover table-dark">
+            
             <tr>
               <th>ID</th>
               <th>Name</th>
@@ -17,19 +18,21 @@
               <th>Course</th>
               <th>Action</th>
             </tr>
-          
+            
+            {% for accounts in users %}
             <tr>
-              <td>01</td>
-              <td>test</td>
-              <td>test@gmail.com</td>
-              <td>123456</td>
-              <td>Python</td>
+              <td>{{accounts.id}}</td>
+              <td>{{accounts.first_name}} {{accounts.last_name}}</td>
+              <td>{{accounts.birth_date}}</td>
+              <td>{{accounts.course}}</td>
+              <td>{{accounts.phone}}</td>
               
               <td>
                 <a href="" class="btn btn-success btn-xs" data-toggle="modal" data-target="#accountedit">Edit</a>
                 <a href="" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete records?')">Delete</a>
               </td>
             </tr>
+            {% endfor %}
           </table>
 
           <!-- Add accounts -->
