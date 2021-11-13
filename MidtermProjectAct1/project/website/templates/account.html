@@ -26,14 +26,64 @@
               <td>{{accounts.first_name}} {{accounts.last_name}}</td>
               <td>{{accounts.birth_date}}</td>
               <td>{{accounts.email}}</td>
-              <td>{{accounts.course}}</td>
               <td>{{accounts.phone}}</td>
+              <td>{{accounts.course}}</td>
               
               <td>
-                <a href="" class="btn btn-success btn-xs" data-toggle="modal" data-target="#accountedit">Edit</a>
+                <a href="/update/{{accounts.id}}" class="btn btn-success btn-xs" data-toggle="modal" data-target="#accountedit{{accounts.id}}">Edit</a>
                 <a href="" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete records?')">Delete</a>
               </td>
             </tr>
+
+
+             <!-- Edit accounts -->
+            <div id="accountedit{{accounts.id}}" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Update Account Information</h4>
+                    </div>
+                    <div class="modal-body">
+                      <form action="/update/{{accounts.id}}" method="POST">
+                          <div class="form-group">
+                            <label>First Name:</label>
+                            <input type="hidden"  name="id" value="">
+                            <input type="text" class="form-control" name="firstName" value="{{accounts.first_name}}">
+                          </div>
+
+                          <div class="form-group">
+                            <label>Last Name:</label>
+                            <input type="text" class="form-control" name="lastName" value="{{accounts.last_name}}">
+                          </div>
+
+                          <div class="form-group">
+                            <label>Birth Date:</label>
+                            <input type="text" class="form-control" name="birthDate" value="{{accounts.birth_date}}">
+                          </div>
+
+                          <div class="form-group">
+                            <label>Course:</label>
+                            <input type="text" class="form-control" name="course" value="{{accounts.course}}">
+                          </div>
+                          <div class="form-group">
+                            <label>Email:</label>
+                            <input type="text" class="form-control" name="email" value="{{accounts.email}}">
+                          </div>
+                          <div class="form-group">
+                            <label>Phone:</label>
+                            <input type="text" class="form-control" name="phone" value="{{accounts.phone}}">
+                          </div>
+                          <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Update</button>
+                          </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+              </div>
+            </div>
             {% endfor %}
           </table>
 
@@ -90,55 +140,6 @@
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   </div>
                 </div>
-            </div>
-          </div>
-
-          <!-- Edit accounts -->
-          <div id="accountedit" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title">Update Information</h4>
-                  </div>
-                  <div class="modal-body">
-                    <form action="" method="POST">
-                        <div class="form-group">
-                          <label>First Name:</label>
-                          <input type="hidden"  name="id" value="">
-                          <input type="text" class="form-control" name="firstName" id="firstName" value="">
-                        </div>
-
-                        <div class="form-group">
-                          <label>Last Name:</label>
-                          <input type="text" class="form-control" name="lastName" id="lastName" value="">
-                        </div>
-
-                        <div class="form-group">
-                          <label>Birth Date:</label>
-                          <input type="text" class="form-control" name="birthDate" id="birthDate" value="">
-                        </div>
-
-                        <div class="form-group">
-                          <label>Course:</label>
-                          <input type="text" class="form-control" name="course" id="course" value="">
-                        </div>
-                        <div class="form-group">
-                          <label>Email:</label>
-                          <input type="text" class="form-control" name="email" value="">
-                        </div>
-                        <div class="form-group">
-                          <label>Phone:</label>
-                          <input type="text" class="form-control" name="phone" value="">
-                        </div>
-                        <div class="form-group">
-                          <button class="btn btn-primary" type="submit">Update</button>
-                        </div>
-                    </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  </div>
-              </div>
             </div>
           </div>
 

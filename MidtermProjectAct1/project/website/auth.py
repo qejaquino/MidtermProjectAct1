@@ -36,6 +36,7 @@ def logout():
 
 
 @auth.route('/insert',methods=['GET','POST'])
+@login_required
 def insert():
     if request.method == 'POST':
         first_name = request.form.get('firstName')
@@ -59,7 +60,27 @@ def insert():
     
     return render_template("account.html", user=current_user)
 
-    
+
+@auth.route('/update/<int:id>', methods=['GET','POST'])
+@login_required
+def update(id):
+    user = User.query.get(id)
+    if request.method == 'POST':
+        user.first_name = request.form.get('firstName')
+        user.last_name = request.form.get('lastName')
+        user.birth_date = request.form.get('birthDate')
+        user.course = request.form.get('course')
+        user.email = request.form.get('email')
+        user.phone = request.form.get('phone')
+        try:
+            db.session.commit()
+            flash("Account Updated Successfully")
+            return redirect(url_for('views.account'))
+        except:
+            return "There's was a problem updating accounts."
+    else:
+        return render_template("account.html", user=current_user)
+
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':
