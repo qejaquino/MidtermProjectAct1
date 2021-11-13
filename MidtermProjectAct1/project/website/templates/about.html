@@ -1,11 +1,33 @@
-{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content %}
+{% extends "base.html" %} 
+{% block title %}Login{% endblock %} 
+{% block content %}
 <br>
-<h1 align="center">About-Us</h1>
-<h2>Hi Title.</h2>
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+            <h3>The list of members</h3>
+            <div class="jumbotron p-3">
+                
+            <table class="table table-hover table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Course</th>
+                </tr>
 
-</p>
-<p>Hello to return please click me <a href="/">return</a></p>
+                {% for accounts in members %}
+                <tr>
+                <td>{{accounts.id}}</td>
+                <td>{{accounts.first_name}} {{accounts.last_name}}</td>
+                <td>{{accounts.course}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <p>Our project is a Simple Enrollment system that can be helpful on future development.</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
     

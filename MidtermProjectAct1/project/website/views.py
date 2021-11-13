@@ -23,4 +23,5 @@ def account():
 
 @views.route('/about')
 def about():
-    return render_template("about.html", user=current_user)
+    all_data = User.query.all()
+    return render_template("about.html", user=current_user, members=all_data)
