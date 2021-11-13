@@ -81,6 +81,15 @@ def update(id):
     else:
         return render_template("account.html", user=current_user)
 
+@auth.route('/delete/<int:id>',methods = ['GET', 'POST'])
+def delete(id):
+    account = User.query.get(id)
+    db.session.delete(account)
+    db.session.commit()
+    flash("Employee Deleted Successfully")
+ 
+    return redirect(url_for('views.account'))
+
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':
