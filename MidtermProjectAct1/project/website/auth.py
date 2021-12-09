@@ -11,8 +11,9 @@ auth = Blueprint('auth', __name__)
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form.get('email')
-        password = request.form.get('password')
+        data = request.get_json()
+        email = data.get('email')
+        password = data.get('password')
 
         user = User.query.filter_by(email=email).first()
         if user:
@@ -39,13 +40,14 @@ def logout():
 @login_required
 def insert():
     if request.method == 'POST':
-        first_name = request.form.get('firstName')
-        last_name = request.form.get('lastName')
-        email = request.form.get('email')
-        password = request.form.get('password')
-        birthdate = request.form.get('birthDate')
-        phone = request.form.get('Phone')
-        course = request.form.get('course')
+        data = request.get_json()
+        first_name = data.get('firstName')
+        last_name = data.get('lastName')
+        email = data.get('email')
+        password = data.get('password')
+        birthdate = data.get('birthDate')
+        phone = data.get('Phone')
+        course = data.get('course')
 
         user = User.query.filter_by(email=email).first()
         if user:
@@ -66,12 +68,13 @@ def insert():
 def update(id):
     user = User.query.get(id)
     if request.method == 'POST':
-        user.first_name = request.form.get('firstName')
-        user.last_name = request.form.get('lastName')
-        user.birth_date = request.form.get('birthDate')
-        user.course = request.form.get('course')
-        user.email = request.form.get('email')
-        user.phone = request.form.get('phone')
+        data = request.get_json()
+        user.first_name = data.get('firstName')
+        user.last_name = data.get('lastName')
+        user.birth_date = data.get('birthDate')
+        user.course = data.get('course')
+        user.email = data.get('email')
+        user.phone = data.get('phone')
         try:
             db.session.commit()
             flash("Account Updated Successfully")
@@ -93,14 +96,15 @@ def delete(id):
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':
-        email = request.form.get('email')
-        first_name = request.form.get('firstName')
-        last_name = request.form.get('lastName')
-        password1 = request.form.get('password1')
-        password2 = request.form.get('password2')
-        birthdate = request.form.get('birthDate')
-        phone = request.form.get('Phone')
-        course = request.form.get('course')
+        data = request.get_json()
+        email = data.get('email')
+        first_name = data.get('firstName')
+        last_name = data.get('lastName')
+        password1 = data.get('password1')
+        password2 = data.get('password2')
+        birthdate = data.get('birthDate')
+        phone = data.get('Phone')
+        course = data.get('course')
 
         user = User.query.filter_by(email=email).first()
         if user:
