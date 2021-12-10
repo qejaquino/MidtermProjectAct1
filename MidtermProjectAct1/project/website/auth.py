@@ -1,4 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask.json import jsonify
+import sqlite3  
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
@@ -128,3 +130,32 @@ def sign_up():
             return redirect(url_for('views.home'))
 
     return render_template("sign_up.html", user=current_user)
+
+
+# @auth.route('/test')
+# def account():
+#     all_data = User.query.all()
+
+#     for user in all_data:
+#         print(user.first_name)
+#         return jsonify(f"<id={user.first_name}, username={user.last_name}>")
+
+
+@auth.route('/Mlogin', methods=['POST'])
+def login1():
+    if request.method == 'POST':
+        data = request.get_json()
+        email = data.get('email')
+        password = data.get('password')
+
+        user = User.query.filter_by(email=email).first()
+        if user:
+            if check_password_hash(user.password, password):
+                print('Logged in successfully!')
+                return "", 200
+            else:
+                print('Invalid Login!')
+                return "", 403
+        else:
+            print('Invalid Login!')
+            return "", 403
